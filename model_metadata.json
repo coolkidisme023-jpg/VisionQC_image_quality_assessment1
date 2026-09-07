@@ -1,0 +1,68 @@
+{
+  "model_version": "1.0.0",
+  "model_type": "sklearn.ensemble.RandomForestClassifier",
+  "pipeline_steps": [
+    "StandardScaler",
+    "RandomForestClassifier"
+  ],
+  "feature_names": [
+    "mean_brightness",
+    "brightness_std",
+    "dark_pixel_ratio",
+    "bright_pixel_ratio",
+    "rms_contrast",
+    "laplacian_variance",
+    "mean_gradient_magnitude",
+    "edge_density",
+    "noise_estimate",
+    "entropy",
+    "mean_saturation",
+    "saturation_std",
+    "colorfulness",
+    "blockiness",
+    "texture_energy",
+    "dynamic_range"
+  ],
+  "classes": [
+    "blur",
+    "clean",
+    "corrupted",
+    "defect",
+    "noise",
+    "overexposed",
+    "underexposed"
+  ],
+  "trained_at": "2026-09-06T19:12:01Z",
+  "random_seed": 42,
+  "hyperparameters": {
+    "n_estimators": 400,
+    "max_depth": 18,
+    "min_samples_leaf": 2,
+    "class_weight": "balanced"
+  },
+  "training_data": {
+    "source": "scikit-image bundled sample images (skimage.data), synthetically degraded",
+    "n_source_images": 19,
+    "n_total_samples": 798,
+    "variants_per_class_per_source": 6,
+    "split_strategy": "GroupShuffleSplit by source image (~70/30 train/test)"
+  },
+  "feature_importance": {
+    "laplacian_variance": 0.12639063116091492,
+    "mean_brightness": 0.1162261386863593,
+    "noise_estimate": 0.08962229884124058,
+    "texture_energy": 0.07989798292022181,
+    "bright_pixel_ratio": 0.07120193702781602,
+    "dark_pixel_ratio": 0.06785279680690423,
+    "dynamic_range": 0.06456636579529659,
+    "entropy": 0.06012582992745659,
+    "edge_density": 0.049490599636643526,
+    "blockiness": 0.04895300510548789,
+    "brightness_std": 0.04137758505840703,
+    "mean_gradient_magnitude": 0.04095819027919271,
+    "mean_saturation": 0.03761501395214032,
+    "rms_contrast": 0.037557837828707114,
+    "colorfulness": 0.03698543833529932,
+    "saturation_std": 0.03117834863791199
+  }
+}
