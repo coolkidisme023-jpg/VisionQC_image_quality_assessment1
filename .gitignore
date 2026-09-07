@@ -1,0 +1,24 @@
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# --- Environment / secrets (none required, but keep local overrides out) ----
+.env
+
+# --- Database (runtime data, not source) -------------------------------------
+data/*.db
+data/*.db-journal
+
+# --- Frontend ------------------------------------------------------------------
+node_modules/
+
+# --- OS / editor -------------------------------------------------------------
+.DS_Store
+*.swp
+.vscode/
+.idea/

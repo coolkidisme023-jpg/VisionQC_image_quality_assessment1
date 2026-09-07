@@ -1,0 +1,49 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: visionqc-backend:latest
+    container_name: visionqc-backend
+    ports:
+      - "8000:8000"
+    environment:
+      FRONTEND_ORIGINS: ${FRONTEND_ORIGINS:-http://localhost:5173}
+      VISIONQC_DATABASE_PATH: /app/data/visionqc.db
+      VISIONQC_MODELS_DIR: /app/models
+      VISIONQC_HOST: 0.0.0.0
+      VISIONQC_PORT: 8000
+    volumes:
+      # Persist the SQLite database across container restarts/rebuilds.
+      - ./data:/app/data
+      # Mounting the trained model read-write lets you retrain on the host
+      # (`python backend/training/train_model.py`) and have the backend
+      # pick up the new model on its next restart, without rebuilding the
+      # image.
+      - ./models:/app/models
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: visionqc-frontend:latest
+    container_name: visionqc-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      # The URL the *browser* uses to reach the backend. Since the
+      # frontend is static files fetched by the user's browser (not
+      # proxied through nginx), this must be an address reachable from
+      # the host/browser - the docker-compose service name "backend"
+      # would NOT work here.
+      VITE_API_URL: ${VITE_API_URL:-http://localhost:8000}
+    depends_on:
+      - backend
+    restart: unless-stopped
