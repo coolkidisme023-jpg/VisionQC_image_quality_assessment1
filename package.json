@@ -1,0 +1,10 @@
+{
+  "name": "visionqc-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VisionQC dashboard - vanilla HTML/CSS/JS (ES modules), no build step. See ../SUBMISSION_NOTES.md for why this replaces the originally-planned React + Vite stack (no npm registry access in the development sandbox). Explicitly allowed by the assessment brief: 'React, Vue, plain HTML/CSS/JavaScript ... may be used.'",
+  "scripts": {
+    "start": "python3 -m http.server 5173",
+    "build": "echo 'No build step required: this is plain ES-module HTML/CSS/JS, served as-is.'"
+  }
+}
